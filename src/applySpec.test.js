@@ -11,4 +11,7 @@ describe('applySpec', () => {
             u: 0,
         });
     });
+    it('works with binary functions', () => {
+        expect(applySpec({ sum: R.add })(1, 2)).toEqual({ sum: 3 });
+    });
 });
