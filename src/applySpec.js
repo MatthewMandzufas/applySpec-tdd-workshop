@@ -1,8 +1,8 @@
 const applySpec = (specObject) => {
-    return function (valueToModify) {
+    return function (...args) {
         let appliedSpecObject = {};
         for (const [key, value] of Object.entries(specObject)) {
-            appliedSpecObject[key] = value(valueToModify);
+            appliedSpecObject[key] = value(...args);
         }
         return appliedSpecObject;
     };
