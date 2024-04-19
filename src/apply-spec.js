@@ -1,3 +1,5 @@
+import R from 'ramda';
+
 function getHighestArity(specification) {
     const highestArity = Object.values(specification).reduce(
         (highestArity, currentValue) => {
@@ -39,7 +41,7 @@ function applySpec(specification) {
         writable: false,
     });
 
-    return factory;
+    return R.curry(factory);
 }
 
 export default applySpec;
