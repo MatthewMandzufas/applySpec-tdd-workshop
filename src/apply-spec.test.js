@@ -21,4 +21,7 @@ describe('apply-spec', () => {
             applySpec({ unnested: R.always(0), nested: [{ sum: R.add }] })(1, 2)
         ).toEqual({ unnested: 0, nested: [{ sum: 3 }] });
     });
+    it('works with arrays of spec objects', () => {
+        expect(applySpec([{ sum: R.add }])(1, 2)).toEqual([{ sum: 3 }]);
+    });
 });
