@@ -1,19 +1,19 @@
 function applySpec(specification) {
     return function (...args) {
-        let appliedSpecification = {};
+        let results = Array.isArray(specification) ? [] : {};
 
         for (const [key, value] of Object.entries(specification)) {
             if (typeof value === 'function') {
-                appliedSpecification[key] = value(...args);
+                results[key] = value(...args);
             } else if (Array.isArray(value)) {
-                appliedSpecification[key] = value.map((item) => {
+                results[key] = value.map((item) => {
                     return applySpec(item)(...args);
                 });
             } else {
-                appliedSpecification[key] = applySpec(value)(...args);
+                results[key] = applySpec(value)(...args);
             }
         }
-        return appliedSpecification;
+        return results;
     };
 }
 
