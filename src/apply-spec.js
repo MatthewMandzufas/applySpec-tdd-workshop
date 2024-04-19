@@ -1,11 +1,13 @@
 function getHighestArity(specification) {
     const highestArity = Object.values(specification).reduce(
-        (accumulator, currentValue) => {
+        (highestArity, currentValue) => {
+            let currentArity;
             if (typeof currentValue === 'function') {
-                return Math.max(currentValue.length, accumulator);
+                currentArity = currentValue.length;
             } else {
-                return Math.max(getHighestArity(currentValue), accumulator);
+                currentArity = getHighestArity(currentValue);
             }
+            return Math.max(currentArity, highestArity);
         },
         0
     );
