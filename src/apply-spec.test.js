@@ -35,4 +35,15 @@ describe('apply-spec', () => {
             ['b1', 'b2'],
         ]);
     });
+    it('works with a spec defining a map key', () => {
+        expect(applySpec({ map: R.prop('a') })({ a: 1 })).toEqual({ map: 1 });
+    });
+    it('retains the highest arity', () => {
+        const f = applySpec({
+            f1: R.nAry(2, R.T),
+            f4: R.nAry(3, R.T),
+            f2: { f3: { f4: R.nAry(1, R.T) }, f5: R.nAry(2, R.T) },
+        });
+        expect(f.length).toEqual(3);
+    });
 });
