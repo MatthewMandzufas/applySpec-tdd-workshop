@@ -46,4 +46,7 @@ describe('apply-spec', () => {
         });
         expect(f.length).toEqual(3);
     });
+    it('returns a curried function', () => {
+        expect(applySpec({ sum: R.add })(1)(2)).toEqual({ sum: 3 });
+    });
 });
